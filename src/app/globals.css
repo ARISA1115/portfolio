@@ -1,0 +1,309 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+/* Custom Scrollbar Styles */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: rgb(30, 41, 59);
+}
+::-webkit-scrollbar-thumb {
+  background: rgb(71, 85, 105);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(100, 116, 139);
+}
+
+/* Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Line Clamp Utility */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Gradient Text */
+.gradient-text {
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Glassmorphism Blur Effect */
+.backdrop-blur-sm {
+  backdrop-filter: blur(4px);
+}
+
+/* Floating Animation */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Pulse Animation */
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Rotation Animation */
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.animate-rotate-slow {
+  animation: rotate 40s linear infinite;
+}
+.animate-rotate-medium {
+  animation: rotate 25s linear infinite;
+}
+.animate-rotate-fast {
+  animation: rotate 12s linear infinite;
+}
+
+/* Button Hover Styles */
+.btn-primary {
+  @apply bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition-all duration-200 transform hover:scale-105;
+}
+.btn-secondary {
+  @apply border border-gray-600 hover:border-gray-500 text-gray-300 hover:text-white px-6 py-3 rounded-lg font-medium transition-all duration-200;
+}
+
+/* Card Hover Effects */
+.card-hover {
+  @apply transition-all duration-300 hover:scale-105 hover:shadow-2xl;
+}
+
+/* Focus Ring Utility */
+.focus-ring {
+  @apply focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50;
+}
+
+/* Responsive Text Sizes */
+.text-responsive-lg {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+@media (min-width: 768px) {
+  .text-responsive-lg {
+    font-size: 2rem;
+    line-height: 2.5rem;
+  }
+}
+@media (min-width: 1024px) {
+  .text-responsive-lg {
+    font-size: 2.5rem;
+    line-height: 3rem;
+  }
+}
+
+/* Shadow for Dark Mode */
+.dark-shadow {
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.1);
+}
+
+/* Smooth Transition */
+.transition-smooth {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Text Selection Style */
+::selection {
+  background-color: rgba(59, 130, 246, 0.3);
+  color: white;
+}
+
+/* Input Field Styles */
+.input-field {
+  @apply bg-slate-700/50 border border-slate-600/50 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent;
+}
+
+/* Progress Bar Animation */
+.skill-progress {
+  animation: fillProgress 2s ease-in-out forwards;
+}
+@keyframes fillProgress {
+  from {
+    width: 0%;
+  }
+  to {
+    width: var(--progress-width);
+  }
+}
+
+/* ===== StarField.tsx Support Styles ===== */
+
+/* Star Particle Style */
+.star {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: white;
+  border-radius: 9999px;
+  opacity: 0.8;
+  animation: twinkle infinite ease-in-out;
+}
+
+/* Twinkle Animation for Stars */
+@keyframes twinkle {
+  0%, 100% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 0.9;
+  }
+}
+
+/* Floating Geometric Shapes */
+.floating-shape {
+  position: absolute;
+  opacity: 0.05;
+  background: white;
+  transform-origin: center center;
+  will-change: transform;
+  pointer-events: none;
+}
+.floating-shape.triangle {
+  width: 40px;
+  height: 40px;
+  clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+}
+.floating-shape.hexagon {
+  width: 50px;
+  height: 50px;
+  clip-path: polygon(25% 5%, 75% 5%, 100% 50%, 75% 95%, 25% 95%, 0% 50%);
+}
+.floating-shape.circle {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  z-index: -46;
+}
+
+/* (Legacy) Floating Particle Effects */
+.particles {
+  position: absolute;
+  background: white;
+  border-radius: 9999px;
+  opacity: 0.03;
+  animation: float 12s ease-in-out infinite;
+}
+.particle-1 {
+  width: 8px;
+  height: 8px;
+  top: 20%;
+  left: 60%;
+}
+.particle-2 {
+  width: 12px;
+  height: 12px;
+  bottom: 25%;
+  left: 40%;
+}
+.particle-3 {
+  width: 6px;
+  height: 6px;
+  top: 70%;
+  right: 20%;
+}
+.particle-4 {
+  width: 10px;
+  height: 10px;
+  bottom: 10%;
+  right: 30%;
+}
+.particle-5 {
+  width: 5px;
+  height: 5px;
+  top: 5%;
+  right: 10%;
+}
+
+/* === Neon Blue Gradient and Floating Animation for Astronaut Icon === */
+
+/* Gradient background for SVG or inline icons */
+.neon-gradient {
+  /* Creates a diagonal blue gradient */
+  background: linear-gradient(135deg, #3b82f6, #60a5fa, #93c5fd);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Keyframes for floating and subtle rotation + light flicker */
+@keyframes neon-intensify {
+  0% {
+    filter: drop-shadow(0 0 6px #3b82f6);
+  }
+  50% {
+    filter: drop-shadow(0 0 10px #2563eb); 
+  }
+  100% {
+    filter: drop-shadow(0 0 16px #1e40af);
+  }
+}
+
+.animate-neon-intensify {
+  animation: neon-intensify 4s ease-in-out infinite;
+}
+
+/* Optional: subtle neon glow around the icon */
+.neon-glow {
+  filter: drop-shadow(0 0 8px #00ccff)
+          drop-shadow(0 0 16px #0099ff)
+          drop-shadow(0 0 24px #0066ff);
+}
+
+/* Adjust scroll margin for the Skills section */
+#skills {
+  scroll-margin-top: 100px;
+}
+
+/* === Skill Card 3D Reveal Animation === */
+.skill-card {
+  opacity: 0;
+  transform: perspective(800px) translateZ(-200px) scale(0.9);
+  transition: all 0.8s ease-out;
+  will-change: transform, opacity;
+}
+
+.skill-card.animate-in {
+  opacity: 1;
+  transform: perspective(800px) translateZ(0px) scale(1);
+}
