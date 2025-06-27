@@ -177,7 +177,7 @@ export const articles: Article[] = [
     title: 'Next.jsポートフォリオをVercel × GitHub Actionsで自動デプロイする',
     description: '',
     date: '2025.06.28',
-    tags: ['Vercel', 'GitHubActions '],
+    tags: ['Vercel', 'GitHubActions'],
     category: 'DevOps',
     url: 'https://qiita.com/ARISA1115/items/76759de674b14d9069a8',
     platform: 'qiita'
