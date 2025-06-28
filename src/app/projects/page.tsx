@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { projects } from '../../data/projects';
 import type { Project } from '../../types';
 import { getTagColor } from '@/utils/getTagColor';
-import { CodeBracketIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import { XMarkIcon } from '@heroicons/react/24/outline';
 import Slideshow from '@/components/ui/Slideshow';
 import ModalPortal from '@/components/common/ModalPortal';
 
@@ -122,7 +122,7 @@ function ProjectDetail({
         <div className="flex-4 space-y-6">
           <div className="flex items-center space-x-3">
             <h3 className="text-2xl font-bold">{project.title}</h3>
-            {project.githubUrl && (
+            {/* {project.githubUrl && (
               <a
                 href={project.githubUrl}
                 target="_blank"
@@ -131,7 +131,7 @@ function ProjectDetail({
               >
                 <CodeBracketIcon className="w-5 h-5" />
               </a>
-            )}
+            )} */}
           </div>
 
           <p className="text-gray-300">{project.description}</p>
