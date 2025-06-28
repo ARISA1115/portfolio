@@ -26,7 +26,7 @@ export const projects: Project[] = [
       "/images/portfolio/articles.png",
       "/images/portfolio/architecture.png",
     ],
-    githubUrl: "https://github.com/ARISA1115/arisa-portfolio"
+    // githubUrl: "https://github.com/ARISA1115/portfolio"
   },
   {
     id: "personal-2",
@@ -50,7 +50,7 @@ export const projects: Project[] = [
       // "/images/cyber-academy/tutorial.png",
       "/images/cyber-academy/comminsoon.png",
     ],
-    githubUrl: "https://github.com/ARISA1115/Cyber-Academy"
+    // githubUrl: "https://github.com/ARISA1115/Cyber-Academy"
   },
   {
     id: "hackathon-1",
@@ -73,7 +73,7 @@ export const projects: Project[] = [
       "/images/engine/main.png",
       "/images/engine/mypage.png",
     ],
-    githubUrl: "https://github.com/ARISA1115/engine"
+    // githubUrl: "https://github.com/ARISA1115/engine"
   },
   {
     id: "hackathon-2",
@@ -97,7 +97,7 @@ export const projects: Project[] = [
       "/images/Fucabo/top.png",
       "/images/Fucabo/chat.png",
     ],    
-    githubUrl: "https://github.com/ARISA1115/Fucabo"
+    // githubUrl: "https://github.com/ARISA1115/Fucabo"
   },
   {
     id: "hackathon-3",
@@ -125,7 +125,7 @@ export const projects: Project[] = [
       "/images/efFEctive/progress.png",
       "/images/efFEctive/ranking.png",
     ],    
-    githubUrl: "https://github.com/ARISA1115/efFEctive"
+    // githubUrl: "https://github.com/ARISA1115/efFEctive"
   },
   {
     id: "hackathon-4",
@@ -149,6 +149,6 @@ export const projects: Project[] = [
       "/images/sabuchan-diary/top.png",
       "/images/sabuchan-diary/chat-sabuchan.png",
     ],
-    githubUrl: "https://github.com/ARISA1115/sabuchan-diary"
+    // githubUrl: "https://github.com/ARISA1115/sabuchan-diary"
   }
 ];
