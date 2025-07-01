@@ -172,7 +172,7 @@ export const articles: Article[] = [
     url: 'https://qiita.com/ARISA1115/items/0625fb1415e1c005ccd4',
     platform: 'qiita'
   },
-    {
+  {
     id: 18,
     title: 'Next.jsポートフォリオをVercel × GitHub Actionsで自動デプロイする',
     description: '',
@@ -182,9 +182,19 @@ export const articles: Article[] = [
     url: 'https://qiita.com/ARISA1115/items/76759de674b14d9069a8',
     platform: 'qiita'
   },
-  // Zenn記事（id:19〜）
   {
     id: 19,
+    title: 'React × TypeScript × Next.js でポートフォリオを制作して学んだこと',
+    description: '',
+    date: '2025.06.30',
+    tags: ['React', 'Next.js', 'TypeScript', 'Tailwind CSS'],
+    category: 'Frontend',
+    url: 'https://qiita.com/ARISA1115/items/96ce590dad1fe147c28b',
+    platform: 'qiita'
+  },
+  // Zenn記事（id:20〜）
+  {
+    id: 20,
     title: 'データベースの基本',
     description: '',
     date: '2025.01.03',
@@ -194,7 +204,7 @@ export const articles: Article[] = [
     platform: 'zenn'
   },
   {
-    id: 20,
+    id: 21,
     title: 'VirtualBoxでApache/Nginxを使ったWebサーバーの構築方法',
     description: '',
     date: '2024.12.23',
@@ -204,7 +214,7 @@ export const articles: Article[] = [
     platform: 'zenn'
   },
   {
-    id: 21,
+    id: 22,
     title: 'Webサーバーの役割とHTTP通信について',
     description: '',
     date: '2024.12.21',
@@ -214,7 +224,7 @@ export const articles: Article[] = [
     platform: 'zenn'
   },
   {
-    id: 22,
+    id: 23,
     title: 'VirtualBoxで仮想マシンを作成し、NAT接続とブリッジ接続を学ぶ - AlmaLinux編',
     description: '',
     date: '2024.12.09',
@@ -224,7 +234,7 @@ export const articles: Article[] = [
     platform: 'zenn'
   },
   {
-    id: 23,
+    id: 24,
     title: '仮想技術とネットワーク接続の基礎解説',
     description: '',
     date: '2024.12.09',
