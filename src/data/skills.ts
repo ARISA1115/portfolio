@@ -7,7 +7,7 @@ export const skillCategories: SkillCategory[] = [
       { name: 'HTML/CSS', level: 80 },
       { name: 'JavaScript', level: 60 },
       { name: 'TypeScript', level: 50 },
-      { name: 'React.js', level: 55 },
+      { name: 'React', level: 55 },
       { name: 'Next.js', level: 50 },
       { name: 'Tailwind CSS', level: 50 }
     ]
