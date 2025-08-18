@@ -192,9 +192,19 @@ export const articles: Article[] = [
     url: 'https://qiita.com/ARISA1115/items/96ce590dad1fe147c28b',
     platform: 'qiita'
   },
-  // Zenn記事（id:20〜）
   {
     id: 20,
+    title: 'FastAPI と DynamoDB Local を使った開発環境構築と動作検証ログ',
+    description: '',
+    date: '2025.07.31',
+    tags: ['Python', 'FastAPI', 'DynamoDB'],
+    category: 'Backend',
+    url: 'https://qiita.com/ARISA1115/items/78ad5fc98dfd265941fb',
+    platform: 'qiita'
+  },
+  // Zenn記事（id:21〜）
+  {
+    id: 21,
     title: 'データベースの基本',
     description: '',
     date: '2025.01.03',
@@ -204,7 +214,7 @@ export const articles: Article[] = [
     platform: 'zenn'
   },
   {
-    id: 21,
+    id: 22,
     title: 'VirtualBoxでApache/Nginxを使ったWebサーバーの構築方法',
     description: '',
     date: '2024.12.23',
@@ -214,7 +224,7 @@ export const articles: Article[] = [
     platform: 'zenn'
   },
   {
-    id: 22,
+    id: 23,
     title: 'Webサーバーの役割とHTTP通信について',
     description: '',
     date: '2024.12.21',
@@ -224,7 +234,7 @@ export const articles: Article[] = [
     platform: 'zenn'
   },
   {
-    id: 23,
+    id: 24,
     title: 'VirtualBoxで仮想マシンを作成し、NAT接続とブリッジ接続を学ぶ - AlmaLinux編',
     description: '',
     date: '2024.12.09',
@@ -234,7 +244,7 @@ export const articles: Article[] = [
     platform: 'zenn'
   },
   {
-    id: 24,
+    id: 25,
     title: '仮想技術とネットワーク接続の基礎解説',
     description: '',
     date: '2024.12.09',
