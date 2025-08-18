@@ -50,7 +50,7 @@ export default function Home() {
             <p className="text-xl md:text-2xl mb-8 h-[40px]">
               <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
                 <Typewriter
-                  words={['Aspiring Backend & Cloud Engineer']}
+                  words={['Security Engineer & Backend Engineer']}
                   loop={true}
                   cursor
                   cursorStyle="|"
