@@ -39,10 +39,10 @@ export const projects: Project[] = [
     ],
     stacks: {
       frontend: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
-      backend: ["Go", "Echo", "MySQL"],
+      backend: ["Go", "C#", "MySQL"],
       infra: ["Docker", "GitHub Actions", "AWS", "Terraform"],
     },
-    tags: ["Next.js", "TypeScript", "Tailwind CSS", "Go", "Echo", "MySQL", "Docker", "GitHub Actions", "AWS", "Terraform"],
+    tags: ["Next.js", "TypeScript", "Tailwind CSS", "Go", "C#", "MySQL", "Docker", "GitHub Actions", "AWS", "Terraform"],
     category: "Personal",
     imageUrl: "/images/cyber-academy/main.png",
     imageUrls: [

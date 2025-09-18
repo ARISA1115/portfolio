@@ -7,7 +7,7 @@ export const skillCategories: SkillCategory[] = [
       { name: 'HTML/CSS', level: 80 },
       { name: 'JavaScript', level: 60 },
       { name: 'TypeScript', level: 50 },
-      { name: 'React', level: 55 },
+      { name: 'React', level: 60 },
       { name: 'Next.js', level: 50 },
       { name: 'Tailwind CSS', level: 50 }
     ]
@@ -19,7 +19,7 @@ export const skillCategories: SkillCategory[] = [
       { name: 'FastAPI', level: 50 },
       { name: 'Django', level: 45 },
       { name: 'Go', level: 20 },
-      { name: 'Echo', level: 20 },
+      { name: 'C#', level: 10 },
       { name: 'MySQL', level: 70 }
     ]
   },
@@ -31,7 +31,7 @@ export const skillCategories: SkillCategory[] = [
       { name: 'Terraform', level: 35 },
       { name: 'GitHub Actions', level: 70 },
       { name: 'Linux', level: 60 },
-      { name: 'Kubernetes', level: 0 }
+      { name: 'GCP', level: 0 }
     ]
   }
 ];
