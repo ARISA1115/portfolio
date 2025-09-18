@@ -15,7 +15,7 @@ export default function Home() {
     const cards = document.querySelectorAll('.skill-card')
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) =>{
+        entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add('animate-in')
             observer.unobserve(entry.target)
@@ -26,7 +26,7 @@ export default function Home() {
     )
     cards.forEach((card) => observer.observe(card))
     return () => observer.disconnect()
-  },[])
+  }, [])
   return (
     <div className="min-h-screen pt-16 relative">
       {/* ================= HERO SECTION ================= */}
@@ -50,7 +50,7 @@ export default function Home() {
             <p className="text-xl md:text-2xl mb-8 h-[40px]">
               <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
                 <Typewriter
-                  words={['Security Engineer & Backend Engineer']}
+                  words={['Backend Engineer & Security Engineer']}
                   loop={true}
                   cursor
                   cursorStyle="|"
@@ -96,52 +96,52 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* === Frontend Skill Card === */}
-          <Link href="/profile#skills">
-            <div className="skill-card group bg-slate-900/60 border border-slate-700 rounded-xl p-8 text-center hover:border-cyan-400 hover:shadow-xl transition duration-300">
-              {/* Icon container with hover background change */}
-              <div className="w-14 h-14 mb-5 mx-auto flex items-center justify-center rounded-lg bg-cyan-500/10 group-hover:bg-cyan-500/20 transition">
-                <CodeBracketIcon className="w-8 h-8 text-cyan-400" />
+            <Link href="/profile#skills">
+              <div className="skill-card group bg-slate-900/60 border border-slate-700 rounded-xl p-8 text-center hover:border-cyan-400 hover:shadow-xl transition duration-300">
+                {/* Icon container with hover background change */}
+                <div className="w-14 h-14 mb-5 mx-auto flex items-center justify-center rounded-lg bg-cyan-500/10 group-hover:bg-cyan-500/20 transition">
+                  <CodeBracketIcon className="w-8 h-8 text-cyan-400" />
+                </div>
+                {/* Skill title */}
+                <h3 className="text-lg font-semibold text-white tracking-wide mb-2">
+                  Frontend
+                </h3>
+                {/* Skill list */}
+                <p className="text-gray-400 text-sm tracking-wide">
+                  React | Next.js | TypeScript
+                </p>
               </div>
-              {/* Skill title */}
-              <h3 className="text-lg font-semibold text-white tracking-wide mb-2">
-                Frontend
-              </h3>
-              {/* Skill list */}
-              <p className="text-gray-400 text-sm tracking-wide">
-                React | Next.js | TypeScript
-              </p>
-            </div>
-          </Link>
+            </Link>
 
             {/* === Backend Skill Card === */}
-          <Link href="/profile#skills">
-            <div className="skill-card group bg-slate-900/60 border border-slate-700 rounded-xl p-8 text-center hover:border-blue-400 hover:shadow-xl transition duration-300">
-              <div className="w-14 h-14 mb-5 mx-auto flex items-center justify-center rounded-lg bg-blue-500/10 group-hover:bg-blue-500/20 transition">
-                <CommandLineIcon className="w-8 h-8 text-blue-400" />
+            <Link href="/profile#skills">
+              <div className="skill-card group bg-slate-900/60 border border-slate-700 rounded-xl p-8 text-center hover:border-blue-400 hover:shadow-xl transition duration-300">
+                <div className="w-14 h-14 mb-5 mx-auto flex items-center justify-center rounded-lg bg-blue-500/10 group-hover:bg-blue-500/20 transition">
+                  <CommandLineIcon className="w-8 h-8 text-blue-400" />
+                </div>
+                <h3 className="text-lg font-semibold text-white tracking-wide mb-2">
+                  Backend
+                </h3>
+                <p className="text-gray-400 text-sm tracking-wide">
+                  Python | Go | C# | MySQL
+                </p>
               </div>
-              <h3 className="text-lg font-semibold text-white tracking-wide mb-2">
-                Backend
-              </h3>
-              <p className="text-gray-400 text-sm tracking-wide">
-                Python | Go | MySQL
-              </p>
-            </div>
-          </Link>
+            </Link>
 
             {/* === DevOps Skill Card === */}
-          <Link href="/profile#skills">
-            <div className="skill-card group bg-slate-900/60 border border-slate-700 rounded-xl p-8 text-center hover:border-indigo-400 hover:shadow-xl transition duration-300">
-              <div className="w-14 h-14 mb-5 mx-auto flex items-center justify-center rounded-lg bg-indigo-500/10 group-hover:bg-indigo-500/20 transition">
-                <CloudIcon className="w-8 h-8 text-indigo-400" />
+            <Link href="/profile#skills">
+              <div className="skill-card group bg-slate-900/60 border border-slate-700 rounded-xl p-8 text-center hover:border-indigo-400 hover:shadow-xl transition duration-300">
+                <div className="w-14 h-14 mb-5 mx-auto flex items-center justify-center rounded-lg bg-indigo-500/10 group-hover:bg-indigo-500/20 transition">
+                  <CloudIcon className="w-8 h-8 text-indigo-400" />
+                </div>
+                <h3 className="text-lg font-semibold text-white tracking-wide mb-2">
+                  DevOps & Cloud
+                </h3>
+                <p className="text-gray-400 text-sm tracking-wide">
+                  AWS | Terraform | GitHub Actions | Docker
+                </p>
               </div>
-              <h3 className="text-lg font-semibold text-white tracking-wide mb-2">
-                DevOps & Cloud
-              </h3>
-              <p className="text-gray-400 text-sm tracking-wide">
-                AWS | Terraform | GitHub Actions | Docker
-              </p>
-            </div>
-          </Link>
+            </Link>
           </div>
         </div>
       </section>
