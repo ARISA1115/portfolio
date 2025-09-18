@@ -21,7 +21,7 @@ export default function Profile() {
         {/* Page Header */}
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">Profile</h1>
-          <p className="text-gray-400 text-lg">インフラ・開発・運用まで学び、現場で活躍できるエンジニアを目指しています</p>
+          <p className="text-gray-400 text-lg">API とデータ基盤の開発を担当しています</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -88,18 +88,16 @@ export default function Profile() {
               </h3>
               <div className="text-gray-300 space-y-4">
                 <p>
-                  2024年5月からITスクール「RareTECH」で学習を始めました。
+                  2024年5月から IT スクール「RareTECH」でフロントエンド、バックエンド、クラウド、DevOps <br />を幅広く学び、React／TypeScript／Next.js、AWS、Docker、Terraform を用いた開発や CI/CDや<br />IaCの基盤を実践しました。
                 </p>
                 <p>
-                  現在はITヘルプデスクとして働きながら、フロントエンド、バックエンド、DevOpsのスキルを<br />磨いています。
+                  IT ヘルプデスクとしての現場経験を経て、2025年9月からはエンジニアとして勤務しています。
                 </p>
                 <p>
-                  特にAWSを活用したクラウドインフラの構築や、GitHub Actions・Docker・Terraformを用いた<br />
-                  CI/CDおよびIaCの実践的な知識とスキルの習得に力を入れています。
+                 現在は、Intel RealSense・Omron 環境センサを用いたデータ収集基盤の開発を担当し、<br />Django ベースの API 実装や MongoDB／Redis によるデータ管理・処理フローの構築を進めています。
                 </p>
                 <p>
-                  今後は、これまでに学んできたクラウドや開発の知識を現場で活かしながら、
-                  運用性や保守性を<br />意識した実践的な開発ができるエンジニアになることを目標としています。
+                  さらに Unity との連携によるデータ可視化にも取り組んでおり、C# と Unity を活用した開発も行って<br />います。
                 </p>
 </div>
             </section>
