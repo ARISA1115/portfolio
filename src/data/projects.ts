@@ -39,7 +39,7 @@ export const projects: Project[] = [
     ],
     stacks: {
       frontend: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
-      backend: ["Go", "C#", "MySQL"],
+      backend: ["Go", "Gin", "MySQL"],
       infra: ["Docker", "GitHub Actions", "AWS", "Terraform"],
     },
     tags: ["Next.js", "TypeScript", "Tailwind CSS", "Go", "C#", "MySQL", "Docker", "GitHub Actions", "AWS", "Terraform"],
