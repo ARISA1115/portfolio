@@ -8,7 +8,7 @@ const StarField = () => {
     if (!starsContainer) return;
 
     starsContainer.innerHTML = '';
-    const numberOfStars = 120;
+    const numberOfStars = 60;
 
     for (let i = 0; i < numberOfStars; i++) {
       const star = document.createElement('div');
