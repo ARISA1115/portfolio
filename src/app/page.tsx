@@ -29,6 +29,7 @@ export default function Home() {
   }, [])
   return (
     <div className="min-h-screen pt-16 relative">
+      
       {/* ================= HERO SECTION ================= */}
       <section className="relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 relative z-10">

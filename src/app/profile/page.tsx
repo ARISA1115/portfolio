@@ -15,8 +15,10 @@ import Image from 'next/image';
 
 export default function Profile() {
   return (
-    <div className="min-h-screen pt-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div className="min-h-screen pt-16 relative">
+      {/* Background overlay for consistency */}
+      {/* (overlay removed to keep body/footer background continuous) */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative z-10">
 
         {/* Page Header */}
         <div className="text-center mb-12">
@@ -25,7 +27,7 @@ export default function Profile() {
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          
+
           {/* Profile Sidebar */}
           <div className="lg:col-span-1">
             <div className="bg-slate-800/50 border border-slate-700/50 rounded-lg p-6 sticky top-24">
@@ -79,7 +81,7 @@ export default function Profile() {
 
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-8">
-            
+
             {/* About Me Section */}
             <section className="bg-slate-800/50 border border-slate-700/50 rounded-lg p-6">
               <h3 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
@@ -94,12 +96,12 @@ export default function Profile() {
                   IT ヘルプデスクとしての現場経験を経て、2025年9月からはエンジニアとして勤務しています。
                 </p>
                 <p>
-                 現在は、Intel RealSense・Omron 環境センサを用いたデータ収集基盤の開発を担当し、<br />Django ベースの API 実装や MongoDB／Redis によるデータ管理・処理フローの構築を進めています。
+                  現在は、Intel RealSense・Omron 環境センサを用いたデータ収集基盤の開発を担当し、<br />Django ベースの API 実装や MongoDB／Redis によるデータ管理・処理フローの構築を進めています。
                 </p>
                 <p>
                   さらに Unity との連携によるデータ可視化にも取り組んでおり、C# と Unity を活用した開発も行って<br />います。
                 </p>
-</div>
+              </div>
             </section>
 
             {/* Current Learning Focus Section */}

@@ -38,8 +38,9 @@ export default function Articles() {
   const totalPages = Math.ceil(filteredArticles.length / articlesPerPage);
 
   return (
-    <div className="min-h-screen pt-16">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div className="min-h-screen pt-16 relative">
+      {/* (overlay removed to keep body/footer background continuous) */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative z-10">
         {/* Header */}
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">Articles</h1>
@@ -58,11 +59,10 @@ export default function Articles() {
                     setActiveFilter(filter);
                     setCurrentPage(1);
                   }}
-                  className={`px-4 py-2 rounded-full font-medium transition-colors ${
-                    activeFilter === filter
-                      ? 'bg-blue-500 text-white'
-                      : 'bg-slate-700/50 text-gray-300 hover:bg-slate-700 hover:text-white'
-                  }`}
+                  className={`px-4 py-2 rounded-full font-medium transition-colors ${activeFilter === filter
+                    ? 'bg-blue-500 text-white'
+                    : 'bg-slate-700/50 text-gray-300 hover:bg-slate-700 hover:text-white'
+                    }`}
                 >
                   {filter}
                 </button>
@@ -114,12 +114,11 @@ export default function Articles() {
               <button
                 key={page}
                 onClick={() => {
-                  setCurrentPage(page); 
+                  setCurrentPage(page);
                   window.scrollTo({ top: 0, behavior: 'smooth' });
                 }}
-                className={`px-3 py-1 rounded-md font-semibold ${
-                  currentPage === page ? 'bg-blue-600 text-white' : 'bg-slate-700 text-gray-300'
-                }`}
+                className={`px-3 py-1 rounded-md font-semibold ${currentPage === page ? 'bg-blue-600 text-white' : 'bg-slate-700 text-gray-300'
+                  }`}
               >
                 {page}
               </button>
@@ -169,9 +168,8 @@ function ArticleCard({ article, getTagColor, tagFilter, setTagFilter }: ArticleC
           <button
             key={tag}
             onClick={() => setTagFilter(tagFilter === tag ? null : tag)}
-            className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${
-              getTagColor(tag)
-            } ${tagFilter === tag ? 'ring-2 ring-blue-400' : ''}`}
+            className={`px-3 py-1 rounded-full text-xs font-medium transition-colors ${getTagColor(tag)
+              } ${tagFilter === tag ? 'ring-2 ring-blue-400' : ''}`}
           >
             {tag}
           </button>
