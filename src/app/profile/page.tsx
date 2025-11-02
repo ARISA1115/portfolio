@@ -37,8 +37,8 @@ export default function Profile() {
                 <Image
                   src="/images/penguin.png"
                   alt="Penguin Icon"
-                  width={50}
-                  height={50}
+                  width={150}
+                  height={150}
                   className="object-contain"
                 />
               </div>
