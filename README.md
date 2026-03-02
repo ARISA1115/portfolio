@@ -12,9 +12,9 @@
   <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/chartjs/chartjs-plain.svg" height="40" alt="Chart.js Logo" style="vertical-align: middle;" />
 </p>
 
-| Framework | Language   | Styling              | Visualization | External API      |
-|-----------|------------|----------------------|---------------|-------------------|
-| Next.js 15 | TypeScript | Tailwind CSS + PostCSS | Chart.js      | Qiita / Zenn (予定) |
+| Framework | Language   | Styling              | Visualization | パッケージマネージャ |
+|-----------|------------|----------------------|---------------|---------------------|
+| Next.js 16 | TypeScript | Tailwind CSS + PostCSS | Chart.js      | pnpm                |
 
 ## 概要
 
@@ -24,7 +24,8 @@
 
 - レスポンシブナビゲーション（ハンバーガーメニュー → 右側スライドメニュー）
 - プロジェクト一覧とモーダル詳細表示（レスポンシブグリッドレイアウト）
-- スキルセットのレーダーチャート可視化
+- スキルセットのレーダーチャート可視化（GitHub API 連携で言語使用量を動的反映）
+- Profile：About Me（現在の経歴をカテゴリ別表示）
 - 技術記事の一覧・フィルタリング・検索
 - 背景アニメーション（星とジオメトリック要素）
 
@@ -33,7 +34,7 @@
 ### 必要な環境
 
 - Node.js 20.x 以上
-- npm または yarn
+- pnpm（`corepack enable` で有効化可能）
 
 ### インストール
 
@@ -43,29 +44,33 @@ git clone https://github.com/ARISA1115/portfolio.git
 cd portfolio
 
 # 依存パッケージをインストール
-npm install
+pnpm install
 ```
 
 ### 開発サーバー起動
 
 ```bash
-npm run dev
+pnpm run dev
 ```
 
-ブラウザで`http://localhost:3000` にアクセスし、アプリが正常に動作することを確認してください。
+ブラウザで `http://localhost:3000` にアクセスし、アプリが正常に動作することを確認してください。
 
 ### ビルド
 
 ```bash
-npm run build
-npm run start
+pnpm run build
+pnpm run start
 ```
 
 ### Lintチェック
 
 ```bash
-npm run lint
+pnpm run lint
 ```
+
+### 環境変数（任意）
+
+- **SKILLS_API**: GitHub Personal Access Token（classic, `repo` スコープ）。Profile のスキルレーダーチャートを GitHub のリポジトリ言語から動的取得する際に使用。未設定の場合は公開リポジトリのみ参照し、設定時は private / 所属 org のリポジトリも含まれる。
 
 ## ディレクトリ構成
 
@@ -75,6 +80,8 @@ portfolio/
 │   └── images/              # プロジェクト画像・アイコン
 ├── src/
 │   ├── app/                 # Next.js App Router
+│   │   ├── api/
+│   │   │   └── github-skills/  # GitHub 言語取得 API（スキルレーダー用）
 │   │   ├── layout.tsx       # 全体レイアウト
 │   │   ├── page.tsx         # ホームページ
 │   │   ├── profile/         # プロフィールページ
@@ -100,8 +107,10 @@ portfolio/
 │   │       └── StarField.tsx        # 背景アニメーション
 │   ├── data/
 │   │   ├── articles.ts      # 記事データ
+│   │   ├── experience.ts    # 現在の経歴（Profile About Me）
+│   │   ├── githubSkillMapping.ts  # GitHub 言語→スキル名マッピング
 │   │   ├── projects.ts      # プロジェクトデータ
-│   │   └── skills.ts        # スキルデータ
+│   │   └── skills.ts        # スキルデータ（静的＋レーダー用）
 │   ├── types/
 │   │   └── index.ts         # 型定義
 │   └── utils/
@@ -200,7 +209,7 @@ z-負: 背景要素（StarField）
 
 - ユニットテストの導入（Jest / Testing Library）
 - E2Eテストの導入（Playwright）
-- CI/CDパイプラインの構築
+- CI/CD：GitHub Actions で main プッシュ時に Vercel へデプロイ（`.github/deploy.yml`）。GitHub Secrets の `SKILLS_API` をデプロイ時に Vercel の環境変数へ同期
 
 ## ライセンス
 
