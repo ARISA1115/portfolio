@@ -12,19 +12,26 @@ import {
 import { FaGithub } from 'react-icons/fa6';
 import XIcon from '../../components/icons/Xicon';
 import Image from 'next/image';
+import { headers } from 'next/headers';
 
-
-function getBaseUrl(): string {
+/** リクエストのホストから base URL を組み立て（Vercel で自己 fetch が確実に動くようにする） */
+async function getBaseUrl(): Promise<string> {
+  const h = await headers();
+  const host = h.get('x-forwarded-host') ?? h.get('host');
+  const proto = h.get('x-forwarded-proto') ?? 'https';
+  if (host) return `${proto}://${host}`;
   if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
   return process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000';
 }
 
+export const dynamic = 'force-dynamic';
+
 export default async function Profile() {
   let skillCategories: SkillCategory[] = staticSkillCategories;
   try {
-    const base = getBaseUrl();
+    const base = await getBaseUrl();
     const res = await fetch(`${base}/api/github-skills`, {
-      next: { revalidate: 3600 },
+      cache: 'no-store',
     });
     if (res.ok) {
       const githubLevels = (await res.json()) as Record<string, number>;
