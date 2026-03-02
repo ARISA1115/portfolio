@@ -64,8 +64,8 @@ export default function Home() {
 
             <div className="flex justify-center mt-2 mb-4">
               <Image
-                src="/images/astronaut.png"
-                alt="Astronaut Icon"
+                src="/images/penguin.png"
+                alt="Penguin Icon"
                 width={250}
                 height={250}
                 className="h-auto animate-float animate-neon-intensify neon-glow filter"
@@ -74,7 +74,7 @@ export default function Home() {
             </div>
 
             {/* === Call To Action Buttons === */}
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mt-4 mb-4">
+            <div className="flex flex-col sm:flex-row gap-6 sm:gap-8 justify-center mt-10 sm:mt-12 mb-4">
               <Link
                 href="/projects"
                 className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-medium transition-colors"
