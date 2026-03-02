@@ -1,4 +1,4 @@
-import type { SkillCategory, LearningFocus } from '../types';
+import type { SkillCategory } from '../types';
 
 export const skillCategories: SkillCategory[] = [
   {
@@ -33,23 +33,5 @@ export const skillCategories: SkillCategory[] = [
       { name: 'Linux', level: 60 },
       { name: 'GCP', level: 0 }
     ]
-  }
-];
-
-export const learningFocus: LearningFocus[] = [
-  {
-    title: 'AWS Cloud Architecture',
-    description: 'SAA、SAP資格取得を目指してクラウドアーキテクチャを学習',
-    progress: 30
-  },
-  {
-    title: 'DevOps & CI/CD',
-    description: 'GitHub Actions や Docker を用いた AWS 向け CI/CD の構築と、Terraform による IaC を学習',
-    progress: 60
-  },
-  {
-    title: 'Modern Frontend Development',
-    description: 'React/Next.js、TypeScriptを使ったモダンなフロントエンド開発',
-    progress: 50
   }
 ];

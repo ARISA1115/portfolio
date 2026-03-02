@@ -8,13 +8,6 @@ export type SkillCategory = {
   skills: SkillData[];
 }
 
-export type LearningFocus = {
-  title: string;
-  description: string;
-  progress?: number;
-}
-
-
 export type Project = {
   id: string;
   title: string;

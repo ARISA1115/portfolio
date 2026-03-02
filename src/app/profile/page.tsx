@@ -1,10 +1,10 @@
 import SkillRadarChart from '../../components/charts/SkillRadarChart';
-import { skillCategories, learningFocus } from '../../data/skills';
-import type { LearningFocus, SkillCategory } from '../../types';
+import { skillCategories } from '../../data/skills';
+import { experienceCategories } from '../../data/experience';
+import type { SkillCategory } from '../../types';
 import {
   MapPinIcon,
   CalendarIcon,
-  AcademicCapIcon,
   BriefcaseIcon,
   ChartBarIcon,
 } from '@heroicons/react/24/outline';
@@ -88,47 +88,19 @@ export default function Profile() {
                 <BriefcaseIcon className="w-5 h-5" />
                 About Me
               </h3>
-              <div className="text-gray-300 space-y-4">
-                <p>
-                  2024年5月から IT スクール「RareTECH」でフロントエンド、バックエンド、クラウド、DevOps <br />を幅広く学び、React／TypeScript／Next.js、AWS、Docker、Terraform を用いた開発や CI/CDや<br />IaCの基盤を実践しました。
-                </p>
-                <p>
-                  IT ヘルプデスクとしての現場経験を経て、2025年9月からはエンジニアとして勤務しています。
-                </p>
-                <p>
-                  現在は、Intel RealSense・Omron 環境センサを用いたデータ収集基盤の開発を担当し、<br />Django ベースの API 実装や MongoDB／Redis によるデータ管理・処理フローの構築を進めています。
-                </p>
-                <p>
-                  さらに Unity との連携によるデータ可視化にも取り組んでおり、C# と Unity を活用した開発も行って<br />います。
-                </p>
+              <div className="text-gray-300 mb-6 space-y-2">
+                <p>官公庁向けセキュリティ・システムからデータ基盤・SaaSまで、設計・実装・インフラまで一貫して携わっています。</p>
+                <p>主な経験は以下のとおりです。</p>
               </div>
-            </section>
-
-            {/* Current Learning Focus Section */}
-            <section className="bg-slate-800/50 border border-slate-700/50 rounded-lg p-6">
-              <h3 className="text-xl font-semibold text-white mb-6 flex items-center gap-2">
-                <AcademicCapIcon className="w-5 h-5" />
-                Current Learning Focus
-              </h3>
-              <div className="space-y-4">
-                {learningFocus.map((focus: LearningFocus, index: number) => (
-                  <div key={index} className="border border-slate-700/50 rounded-lg p-4">
-                    <h4 className="font-semibold text-white mb-2">{focus.title}</h4>
-                    <p className="text-gray-400 text-sm mb-3">{focus.description}</p>
-                    {focus.progress && (
-                      <div>
-                        <div className="flex justify-between text-sm mb-1">
-                          <span className="text-gray-400">Progress</span>
-                          <span className="text-blue-400">{focus.progress}%</span>
-                        </div>
-                        <div className="w-full bg-slate-700 rounded-full h-2">
-                          <div
-                            className="bg-blue-500 h-2 rounded-full transition-all duration-300"
-                            style={{ width: `${focus.progress}%` }}
-                          />
-                        </div>
-                      </div>
-                    )}
+              <div className="text-gray-300 space-y-4">
+                {experienceCategories.map((category) => (
+                  <div key={category.title}>
+                    <h4 className="font-semibold text-white mb-2">{category.title}</h4>
+                    <ul className="list-disc list-inside space-y-1">
+                      {category.items.map((item) => (
+                        <li key={item}>{item}</li>
+                      ))}
+                    </ul>
                   </div>
                 ))}
               </div>
