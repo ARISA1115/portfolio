@@ -21,6 +21,20 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Sync SKILLS_API to Vercel
+        env:
+          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
+          SKILLS_API: ${{ secrets.SKILLS_API }}
+          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+        run: |
+          URL="https://api.vercel.com/v10/projects/${VERCEL_PROJECT_ID}/env?upsert=true"
+          [ -n "${VERCEL_ORG_ID}" ] && URL="${URL}&teamId=${VERCEL_ORG_ID}"
+          curl -sS -X POST "$URL" \
+            -H "Authorization: Bearer ${VERCEL_TOKEN}" \
+            -H "Content-Type: application/json" \
+            -d "{\"key\":\"SKILLS_API\",\"value\":\"${SKILLS_API}\",\"type\":\"encrypted\",\"target\":[\"production\",\"preview\"]}"
+
       - name: Build and Deploy to Vercel
         uses: amondnet/vercel-action@v25
         with:

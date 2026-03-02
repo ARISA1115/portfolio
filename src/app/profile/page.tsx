@@ -1,5 +1,6 @@
 import SkillRadarChart from '../../components/charts/SkillRadarChart';
-import { skillCategories } from '../../data/skills';
+import { skillCategories as staticSkillCategories } from '../../data/skills';
+import { mergeSkillsWithGitHub } from '../../data/githubSkillMapping';
 import { experienceCategories } from '../../data/experience';
 import type { SkillCategory } from '../../types';
 import {
@@ -13,7 +14,26 @@ import XIcon from '../../components/icons/Xicon';
 import Image from 'next/image';
 
 
-export default function Profile() {
+function getBaseUrl(): string {
+  if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
+  return process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000';
+}
+
+export default async function Profile() {
+  let skillCategories: SkillCategory[] = staticSkillCategories;
+  try {
+    const base = getBaseUrl();
+    const res = await fetch(`${base}/api/github-skills`, {
+      next: { revalidate: 3600 },
+    });
+    if (res.ok) {
+      const githubLevels = (await res.json()) as Record<string, number>;
+      skillCategories = mergeSkillsWithGitHub(staticSkillCategories, githubLevels);
+    }
+  } catch {
+    // フォールバック: 静的データのまま
+  }
+
   return (
     <div className="min-h-screen pt-16 relative">
       {/* Background overlay for consistency */}
@@ -115,7 +135,7 @@ export default function Profile() {
             Skills
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {skillCategories.map((category: SkillCategory, index: number) => {
+            {skillCategories.map((category, index) => {
               const colors = ['#06b6d4', '#3b82f6', '#6366f1']; // cyan, blue, indigo
               return (
                 <SkillRadarChart
