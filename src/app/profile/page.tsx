@@ -37,7 +37,7 @@ export default async function Profile() {
         {/* Page Header */}
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">Profile</h1>
-          <p className="text-gray-400 text-lg">API とデータ基盤の開発を担当しています</p>
+          <p className="text-gray-400 text-lg">セキュリティ・データ基盤・SaaSの設計・実装・インフラを担当しています</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
