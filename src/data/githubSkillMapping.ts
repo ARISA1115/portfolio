@@ -1,9 +1,8 @@
 import type { SkillCategory } from '../types';
 
 /**
- * GitHub API の言語名 → 既存スキル（カテゴリ名 + スキル名）へのマッピング。
- * 複数言語が同一スキルにマップする場合（例: HTML + CSS → HTML/CSS）は
- * マージ時に最大値を使う。
+ * GitHub API /repos/:owner/:repo/languages で返る言語名 → スキル（カテゴリ:スキル名）へのマッピング。
+ * 複数言語が同一スキルにマップする場合はマージ時に最大値を使う。
  */
 export const githubLanguageToSkill: Record<
   string,
@@ -13,15 +12,20 @@ export const githubLanguageToSkill: Record<
   TypeScript: { category: 'Frontend', skill: 'TypeScript' },
   JavaScript: { category: 'Frontend', skill: 'JavaScript' },
   Go: { category: 'Backend', skill: 'Go' },
+  Java: { category: 'Backend', skill: 'Java' },
+  Kotlin: { category: 'Backend', skill: 'Kotlin' },
   'C#': { category: 'Backend', skill: 'C#' },
-  HTML: { category: 'Frontend', skill: 'HTML/CSS' },
-  CSS: { category: 'Frontend', skill: 'HTML/CSS' },
+  Rust: { category: 'Backend', skill: 'Rust' },
+  Vue: { category: 'Frontend', skill: 'Nuxt.js' },
   HCL: { category: 'DevOps & Cloud', skill: 'Terraform' },
+  Shell: { category: 'DevOps & Cloud', skill: 'Linux' },
 };
 
 /**
  * 静的 skillCategories と GitHub 言語別 0–100 をマージする。
- * マッピングにあるスキルは GitHub 値で上書き（同一スキルに複数言語がある場合は最大値）。
+ * マッピングがあるスキルは API の値をそのまま使用（レーダーチャートが API から取得した値で表示される）。
+ * API にないスキル（React, Next.js, FastAPI など GitHub が言語として返さないもの）は静的値のまま。
+ * 同一スキルに複数言語がマップする場合は、API 値の最大を使う。
  */
 export function mergeSkillsWithGitHub(
   staticCategories: SkillCategory[],
@@ -43,8 +47,9 @@ export function mergeSkillsWithGitHub(
   for (const cat of merged) {
     for (const skill of cat.skills) {
       const key = `${cat.name}:${skill.name}`;
-      if (levelByKey[key] !== undefined) {
-        skill.level = levelByKey[key];
+      const apiLevel = levelByKey[key];
+      if (apiLevel !== undefined) {
+        skill.level = apiLevel;
       }
     }
   }

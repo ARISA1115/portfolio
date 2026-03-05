@@ -54,6 +54,9 @@ export default function SkillRadarChart({ title, skills, color }: Props) {
   const options = {
     responsive: true,
     maintainAspectRatio: false,
+    layout: {
+      padding: 16
+    },
     scales: {
       r: {
         suggestedMin: 0,
@@ -65,8 +68,9 @@ export default function SkillRadarChart({ title, skills, color }: Props) {
         pointLabels: {
           color: '#cbd5e1', // gray-300
           font: {
-            size: 14
-          }
+            size: 11
+          },
+          padding: 4
         },
         grid: {
           color: '#334155' // slate-700
@@ -91,7 +95,7 @@ export default function SkillRadarChart({ title, skills, color }: Props) {
   return (
     <div className="bg-slate-800/50 border border-slate-700/50 rounded-lg p-6">
       <h3 className="text-lg font-semibold text-white text-center mb-4">{title}</h3>
-      <div className="h-64">
+      <div className="h-72">
         <Radar data={data} options={options} />
       </div>
     </div>

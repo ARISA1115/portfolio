@@ -7,7 +7,8 @@ export const getTagColor = (tag: string): string => {
     TypeScript: 'bg-blue-400/20 text-blue-300',
     React: 'bg-sky-500/20 text-white-300',
     'Next.js': 'bg-gray-600/20 text-gray-400',
-    Vite: 'bg-yellow-300/20 text-sky-400', 
+    'Nuxt.js': 'bg-emerald-600/20 text-emerald-300',
+    Vite: 'bg-yellow-300/20 text-sky-400',
     'Tailwind CSS': 'bg-sky-400/20 text-sky-300',
 
     // Backend
