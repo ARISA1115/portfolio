@@ -48,8 +48,11 @@ export function mergeSkillsWithGitHub(
     for (const skill of cat.skills) {
       const key = `${cat.name}:${skill.name}`;
       const apiLevel = levelByKey[key];
-      if (apiLevel !== undefined) {
-        skill.level = apiLevel;
+      const isMappedToGitHub = Object.values(githubLanguageToSkill).some(
+        (m) => m.category === cat.name && m.skill === skill.name
+      );
+      if (isMappedToGitHub) {
+        skill.level = apiLevel ?? 0;
       }
     }
   }
