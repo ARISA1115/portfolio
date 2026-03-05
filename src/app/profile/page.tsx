@@ -1,6 +1,9 @@
 import SkillRadarChart from '../../components/charts/SkillRadarChart';
+import ContributionGraph from '../../components/ContributionGraph';
 import { skillCategories as staticSkillCategories } from '../../data/skills';
 import { mergeSkillsWithGitHub } from '../../data/githubSkillMapping';
+import { fetchGitHubLanguageLevels } from '@/lib/githubSkills';
+import { fetchGitHubContributions } from '@/lib/githubContributions';
 import { experienceCategories } from '../../data/experience';
 import type { SkillCategory } from '../../types';
 import {
@@ -12,33 +15,17 @@ import {
 import { FaGithub } from 'react-icons/fa6';
 import XIcon from '../../components/icons/Xicon';
 import Image from 'next/image';
-import { headers } from 'next/headers';
-
-/** リクエストのホストから base URL を組み立て（Vercel で自己 fetch が確実に動くようにする） */
-async function getBaseUrl(): Promise<string> {
-  const h = await headers();
-  const host = h.get('x-forwarded-host') ?? h.get('host');
-  const proto = h.get('x-forwarded-proto') ?? 'https';
-  if (host) return `${proto}://${host}`;
-  if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
-  return process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000';
-}
 
 export const dynamic = 'force-dynamic';
 
 export default async function Profile() {
   let skillCategories: SkillCategory[] = staticSkillCategories;
-  try {
-    const base = await getBaseUrl();
-    const res = await fetch(`${base}/api/github-skills`, {
-      cache: 'no-store',
-    });
-    if (res.ok) {
-      const githubLevels = (await res.json()) as Record<string, number>;
-      skillCategories = mergeSkillsWithGitHub(staticSkillCategories, githubLevels);
-    }
-  } catch {
-    // フォールバック: 静的データのまま
+  const [githubLevels, contributionData] = await Promise.all([
+    fetchGitHubLanguageLevels(),
+    fetchGitHubContributions(),
+  ]);
+  if (githubLevels !== null) {
+    skillCategories = mergeSkillsWithGitHub(staticSkillCategories, githubLevels);
   }
 
   return (
@@ -134,6 +121,9 @@ export default async function Profile() {
             </section>
           </div>
         </div>
+
+        {/* Contribution Graph (GitHub) */}
+        <ContributionGraph initialData={contributionData} />
 
         {/* Skills Section */}
         <section id="skills" className="mt-12">
