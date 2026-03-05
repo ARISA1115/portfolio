@@ -53,7 +53,7 @@ pnpm install
 pnpm run dev
 ```
 
-ブラウザで `http://localhost:3000` にアクセスし、アプリが正常に動作することを確認してください。
+ブラウザで `http://localhost:4000` にアクセスし、アプリが正常に動作することを確認してください。
 
 ### ビルド
 
@@ -70,7 +70,8 @@ pnpm run lint
 
 ### 環境変数（任意）
 
-- **SKILLS_API**: GitHub Personal Access Token（classic, `repo` スコープ）。Profile のスキルレーダーチャートを GitHub のリポジトリ言語から動的取得する際に使用。未設定の場合は公開リポジトリのみ参照し、設定時は private / 所属 org のリポジトリも含まれる。
+- **SKILLS_API**: GitHub Personal Access Token（classic, `repo` スコープ）。Profile のスキルレーダーチャートを GitHub のリポジトリ言語から動的取得する際に使用。未設定の場合は公開リポジトリのみ参照し、設定時は private / 所属 org のリポジトリも含まれる。**コントリビューショングラフ**（`/api/github-contributions`）でも同じトークンを使用する。未認証だと GitHub のレート制限（403）になりやすいため、ローカルでグラフを表示する場合は `.env.local` に設定推奨。
+- **GITHUB_TOKEN**: 上記の代わりにこちらを設定しても、コントリビューショングラフ用 API で使用される（SKILLS_API が優先）。
 
 ## ディレクトリ構成
 
