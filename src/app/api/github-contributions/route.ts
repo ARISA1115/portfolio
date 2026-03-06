@@ -36,17 +36,23 @@ export async function GET(request: Request) {
     const yearParam = searchParams.get('year');
     const now = new Date();
     const currentYear = now.getFullYear();
-    const year = yearParam ? parseInt(yearParam, 10) : currentYear;
 
     let from: Date;
     let to: Date;
-    if (year === currentYear) {
-      // 現在年を明示指定: Jan 1〜今日（暦年ビュー）
-      from = new Date(`${year}-01-01T00:00:00Z`);
+    if (!yearParam) {
+      // year 未指定 = 過去12ヶ月（初期表示・フォールバック用）
       to = now;
+      from = new Date(now);
+      from.setFullYear(from.getFullYear() - 1);
     } else {
-      from = new Date(`${year}-01-01T00:00:00Z`);
-      to = new Date(`${year}-12-31T23:59:59Z`);
+      const year = parseInt(yearParam, 10);
+      if (year === currentYear) {
+        from = new Date(`${year}-01-01T00:00:00Z`);
+        to = now;
+      } else {
+        from = new Date(`${year}-01-01T00:00:00Z`);
+        to = new Date(`${year}-12-31T23:59:59Z`);
+      }
     }
     const fromStr = from.toISOString();
 

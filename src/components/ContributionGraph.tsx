@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { FaGithub } from 'react-icons/fa6';
 import type { ContributionData } from '@/lib/githubContributions';
 
@@ -80,8 +80,26 @@ export default function ContributionGraph({ initialData }: Props) {
   // null = 初期状態（過去12ヶ月表示）、数値 = 選択した暦年
   const [selectedYear, setSelectedYear] = useState<number | null>(null);
   const [data, setData] = useState<Data | null>(initialData ?? null);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(!initialData);
   const [tooltip, setTooltip] = useState<TooltipState>(null);
+
+  // サーバー側で取得失敗時（Vercel など）はクライアントで API から再取得
+  useEffect(() => {
+    if (initialData !== null && initialData !== undefined) return;
+    let cancelled = false;
+    fetch('/api/github-contributions', { cache: 'no-store' })
+      .then((res) => (res.ok ? res.json() : Promise.reject(new Error('fetch failed'))))
+      .then((body: Data) => {
+        if (!cancelled) setData(body);
+      })
+      .catch(() => {
+        if (!cancelled) setData(null);
+      })
+      .finally(() => {
+        if (!cancelled) setLoading(false);
+      });
+    return () => { cancelled = true; };
+  }, [initialData]);
 
   const switchYear = useCallback(async (year: number) => {
     if (year === selectedYear) {
