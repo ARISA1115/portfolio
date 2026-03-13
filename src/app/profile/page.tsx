@@ -1,11 +1,13 @@
-import SkillRadarChart from '../../components/charts/SkillRadarChart';
-import ContributionGraph from '../../components/ContributionGraph';
-import { skillCategories as staticSkillCategories } from '../../data/skills';
-import { mergeSkillsWithGitHub } from '../../data/githubSkillMapping';
+import SkillRadarChart from '@/components/charts/SkillRadarChart';
+import ContributionGraph from '@/components/features/github/ContributionGraph';
+import Card from '@/components/ui/Card';
+import { skillCategories as staticSkillCategories } from '@/data/skills';
+import { mergeSkillsWithGitHub } from '@/data/githubSkillMapping';
 import { fetchGitHubLanguageLevels } from '@/lib/githubSkills';
 import { fetchGitHubContributions } from '@/lib/githubContributions';
-import { experienceCategories } from '../../data/experience';
-import type { SkillCategory } from '../../types';
+import { experienceCategories } from '@/data/experience';
+import { profile } from '@/data/profile';
+import type { SkillCategory } from '@/types';
 import {
   MapPinIcon,
   CalendarIcon,
@@ -13,12 +15,12 @@ import {
   ChartBarIcon,
 } from '@heroicons/react/24/outline';
 import { FaGithub } from 'react-icons/fa6';
-import XIcon from '../../components/icons/Xicon';
+import XIcon from '@/components/icons/Xicon';
 import Image from 'next/image';
 
 export const dynamic = 'force-dynamic';
 
-export default async function Profile() {
+export default async function ProfilePage() {
   let skillCategories: SkillCategory[] = staticSkillCategories;
   const [githubLevels, contributionData] = await Promise.all([
     fetchGitHubLanguageLevels(),
@@ -30,11 +32,8 @@ export default async function Profile() {
 
   return (
     <div className="min-h-screen pt-16 relative">
-      {/* Background overlay for consistency */}
-      {/* (overlay removed to keep body/footer background continuous) */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative z-10">
 
-        {/* Page Header */}
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">Profile</h1>
           <p className="text-gray-400 text-lg">セキュリティ・データ基盤・SaaSの設計・実装・インフラを担当しています</p>
@@ -44,10 +43,8 @@ export default async function Profile() {
 
           {/* Profile Sidebar */}
           <div className="lg:col-span-1">
-            <div className="bg-slate-800/50 border border-slate-700/50 rounded-lg p-6 sticky top-24">
-
-              {/* Avatar and Name */}
-              <div className="w-20 h-20 mb-5 mx-auto flex items-center justify-center rounded-lg bg-blue-500/10 group-hover:bg-blue-500/20 transition">
+            <Card className="sticky top-24">
+              <div className="w-20 h-20 mb-5 mx-auto flex items-center justify-center rounded-lg bg-blue-500/10 transition">
                 <Image
                   src="/images/penguin.png"
                   alt="Penguin Icon"
@@ -57,53 +54,49 @@ export default async function Profile() {
                 />
               </div>
 
-              {/* Location and Join Date */}
               <div className="space-y-3 mb-6">
                 <div className="flex items-center gap-3 text-gray-300">
                   <MapPinIcon className="w-5 h-5 text-gray-400" />
-                  <span>Osaka, Japan</span>
+                  <span>{profile.location}</span>
                 </div>
                 <div className="flex items-center gap-3 text-gray-300">
                   <CalendarIcon className="w-5 h-5 text-gray-400" />
-                  <span>Started: 2024.05.28</span>
+                  <span>Started: {profile.startedAt}</span>
                 </div>
               </div>
 
-              {/* Social Links */}
               <div className="space-y-2">
                 <a
-                  href="https://github.com/ARISA1115"
+                  href={profile.social.github.url}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-3 text-blue-400 hover:text-blue-300 transition-colors"
                 >
                   <FaGithub className="w-5 h-5 text-gray-400" />
-                  <span className="truncate">github.com/ARISA1115</span>
+                  <span className="truncate">{profile.social.github.label}</span>
                 </a>
                 <a
-                  href="https://x.com/ar1sa1115"
+                  href={profile.social.twitter.url}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-3 text-blue-400 hover:text-blue-300 transition-colors"
                 >
                   <XIcon className="w-5 h-5 text-gray-400" />
-                  <span className="truncate">x.com/ar1sa1115</span>
+                  <span className="truncate">{profile.social.twitter.label}</span>
                 </a>
               </div>
-            </div>
+            </Card>
           </div>
 
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-8">
-
-            {/* About Me Section */}
-            <section className="bg-slate-800/50 border border-slate-700/50 rounded-lg p-6">
+            <Card>
               <h3 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
                 <BriefcaseIcon className="w-5 h-5" />
                 About Me
               </h3>
               <div className="text-gray-300 mb-6 space-y-2">
-                <p>官公庁向けセキュリティ・システムからデータ基盤・SaaSまで、設計・実装・インフラまで一貫して携わっています。</p>
+                <p>{profile.bio}</p>
                 <p>主な経験は以下のとおりです。</p>
               </div>
               <div className="text-gray-300 space-y-4">
@@ -118,14 +111,12 @@ export default async function Profile() {
                   </div>
                 ))}
               </div>
-            </section>
+            </Card>
           </div>
         </div>
 
-        {/* Contribution Graph (GitHub) */}
         <ContributionGraph initialData={contributionData} />
 
-        {/* Skills Section */}
         <section id="skills" className="mt-12">
           <h3 className="text-2xl font-semibold text-white mb-8 text-center flex items-center justify-center gap-2">
             <ChartBarIcon className="w-6 h-6 text-white" />
@@ -133,7 +124,7 @@ export default async function Profile() {
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {skillCategories.map((category, index) => {
-              const colors = ['#06b6d4', '#3b82f6', '#6366f1']; // cyan, blue, indigo
+              const colors = ['#06b6d4', '#3b82f6', '#6366f1'];
               return (
                 <SkillRadarChart
                   key={category.name}

@@ -40,7 +40,6 @@ export default function Projects() {
                 <ProjectDetail
                   project={selectedProject}
                   onClose={() => setSelectedProject(null)}
-                  getTagColor={getTagColor}
                 />
               </div>
             </div>
@@ -123,11 +122,9 @@ function ProjectCard({
 function ProjectDetail({
   project,
   onClose,
-  getTagColor
 }: {
   project: Project;
   onClose: () => void;
-  getTagColor: (tag: string) => string;
 }) {
   return (
     <div className="relative w-full">
