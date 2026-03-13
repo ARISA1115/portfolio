@@ -1,12 +1,11 @@
-const GITHUB_USER = 'ARISA1115';
-const GITHUB_GRAPHQL = 'https://api.github.com/graphql';
+import { GITHUB_USER, GITHUB_GRAPHQL, CACHE_REVALIDATE } from '@/config/site';
 
 export type ContributionData = {
   totalContributions: number;
   weeks: { contributionDays: { date: string; contributionCount: number }[] }[];
 };
 
-const query = `
+const CONTRIBUTION_QUERY = `
   query($login: String!, $from: DateTime!, $to: DateTime!) {
     user(login: $login) {
       contributionsCollection(from: $from, to: $to) {
@@ -24,23 +23,37 @@ const query = `
   }
 `;
 
+function getToken(): string | undefined {
+  return process.env.SKILLS_API ?? process.env.GITHUB_TOKEN;
+}
+
+function hasInvalidChars(token: string): boolean {
+  return [...token].some((c) => c.codePointAt(0)! > 255);
+}
+
 /**
  * GitHub GraphQL API からコントリビューションデータを取得する。
+ * dateRange を省略した場合は過去 12 ヶ月を取得する。
  * サーバー専用。失敗時は null を返す。
  */
-export async function fetchGitHubContributions(): Promise<ContributionData | null> {
+export async function fetchGitHubContributions(
+  dateRange?: { from: Date; to: Date }
+): Promise<ContributionData | null> {
   try {
-    const token = process.env.SKILLS_API ?? process.env.GITHUB_TOKEN;
+    const token = getToken();
 
-    if (token && [...token].some((c) => c.codePointAt(0)! > 255)) {
-      console.error('githubContributions: SKILLS_API/GITHUB_TOKEN に非ASCII文字が含まれています。');
+    if (token && hasInvalidChars(token)) {
+      console.error('fetchGitHubContributions: SKILLS_API/GITHUB_TOKEN に非ASCII文字が含まれています。');
       return null;
     }
 
     const now = new Date();
-    const to = now.toISOString();
-    const from = new Date(now);
-    from.setFullYear(from.getFullYear() - 1);
+    const to = dateRange?.to ?? now;
+    const from = dateRange?.from ?? (() => {
+      const d = new Date(now);
+      d.setFullYear(d.getFullYear() - 1);
+      return d;
+    })();
 
     const headers: HeadersInit = {
       'Content-Type': 'application/json',
@@ -51,14 +64,14 @@ export async function fetchGitHubContributions(): Promise<ContributionData | nul
       method: 'POST',
       headers,
       body: JSON.stringify({
-        query,
-        variables: { login: GITHUB_USER, from: from.toISOString(), to },
+        query: CONTRIBUTION_QUERY,
+        variables: { login: GITHUB_USER, from: from.toISOString(), to: to.toISOString() },
       }),
-      next: { revalidate: 3600 },
+      next: { revalidate: CACHE_REVALIDATE },
     });
 
     if (!res.ok) {
-      console.error('githubContributions fetch error:', res.status);
+      console.error('fetchGitHubContributions fetch error:', res.status);
       return null;
     }
 
@@ -77,7 +90,7 @@ export async function fetchGitHubContributions(): Promise<ContributionData | nul
     };
 
     if (json.errors?.length) {
-      console.error('githubContributions GraphQL errors:', json.errors);
+      console.error('fetchGitHubContributions GraphQL errors:', json.errors);
       return null;
     }
 

@@ -1,5 +1,4 @@
-const GITHUB_USER = 'ARISA1115';
-const GITHUB_API = 'https://api.github.com';
+import { GITHUB_USER, GITHUB_API, CACHE_REVALIDATE } from '@/config/site';
 
 async function fetchRepos(token: string | undefined) {
   const headers: HeadersInit = {
@@ -10,7 +9,7 @@ async function fetchRepos(token: string | undefined) {
   const url = token
     ? `${GITHUB_API}/user/repos?per_page=100&sort=pushed&type=owner`
     : `${GITHUB_API}/users/${GITHUB_USER}/repos?per_page=100&type=owner`;
-  const res = await fetch(url, { headers, next: { revalidate: 3600 } });
+  const res = await fetch(url, { headers, next: { revalidate: CACHE_REVALIDATE } });
   if (!res.ok) throw new Error(`GitHub repos: ${res.status}`);
   const repos = (await res.json()) as {
     full_name: string;
@@ -33,7 +32,7 @@ async function fetchLanguages(
   };
   const res = await fetch(
     `${GITHUB_API}/repos/${owner}/${repo}/languages`,
-    { headers, next: { revalidate: 3600 } }
+    { headers, next: { revalidate: CACHE_REVALIDATE } }
   );
   if (!res.ok) return {};
   return res.json() as Promise<Record<string, number>>;
