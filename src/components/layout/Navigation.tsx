@@ -5,22 +5,20 @@ import { usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import MobileSideMenu from './MobileSideMenu';
 
+const NAV_ITEMS = [
+  { href: '/', label: 'Home' },
+  { href: '/profile', label: 'Profile' },
+  { href: '/projects', label: 'Projects' },
+  { href: '/articles', label: 'Articles' },
+];
+
 const Navigation = () => {
   const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  const navItems = [
-    { href: '/', label: 'Home' },
-    { href: '/profile', label: 'Profile' },
-    { href: '/projects', label: 'Projects' },
-    { href: '/articles', label: 'Articles' }
-  ];
-
   const toggleMobileMenu = () => {
     const newState = !isMobileMenuOpen;
     setIsMobileMenuOpen(newState);
-
-    // Update body class and trigger event
     if (newState) {
       document.body.classList.add('mobile-menu-open');
     } else {
@@ -35,27 +33,19 @@ const Navigation = () => {
     document.dispatchEvent(new CustomEvent('mobileMenuToggle'));
   };
 
-  // Close mobile menu on route change
   useEffect(() => {
     setIsMobileMenuOpen(false);
   }, [pathname]);
 
-  // Close mobile menu on escape key and external events
   useEffect(() => {
     const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        closeMobileMenu();
-      }
+      if (e.key === 'Escape') closeMobileMenu();
     };
-
-    const handleCloseEvent = () => {
-      closeMobileMenu();
-    };
+    const handleCloseEvent = () => closeMobileMenu();
 
     if (isMobileMenuOpen) {
       document.addEventListener('keydown', handleEscape);
       document.addEventListener('closeMobileMenu', handleCloseEvent);
-      // Prevent body scrolling when menu is open
       document.body.style.overflow = 'hidden';
     } else {
       document.body.style.overflow = 'unset';
@@ -70,13 +60,10 @@ const Navigation = () => {
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-[9996]
-  bg-gradient-to-r from-indigo-950/90 via-indigo-950/60 to-indigo-950/90
-  backdrop-blur-md border-b border-white/10
-  ring-1 ring-white/5
-  rounded-b-md">
+      bg-gradient-to-r from-indigo-950/90 via-indigo-950/60 to-indigo-950/90
+      backdrop-blur-md border-b border-white/10 ring-1 ring-white/5 rounded-b-md">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
-          {/* Logo */}
           <Link
             href="/"
             className="text-xl font-bold text-blue-400 hover:text-blue-300 transition-colors relative"
@@ -85,16 +72,17 @@ const Navigation = () => {
             Arisa
           </Link>
 
-          {/* Navigation Links */}
           <div className="hidden md:block">
             <div className="flex items-center space-x-8" style={{ zIndex: 9998 }}>
-              {navItems.map((item) => {
+              {NAV_ITEMS.map((item) => {
                 const isActive = pathname === item.href;
                 return (
                   <Link
                     key={item.href}
                     href={item.href}
-                    className={`px-3 py-2 text-base font-medium transition-colors relative ${isActive ? 'text-blue-400' : 'text-gray-300 hover:text-white'}`}
+                    className={`px-3 py-2 text-base font-medium transition-colors relative ${
+                      isActive ? 'text-blue-400' : 'text-gray-300 hover:text-white'
+                    }`}
                   >
                     {item.label}
                     {isActive && (
@@ -106,7 +94,6 @@ const Navigation = () => {
             </div>
           </div>
 
-          {/* Mobile menu button */}
           <div className="md:hidden">
             <button
               onClick={toggleMobileMenu}
@@ -126,14 +113,9 @@ const Navigation = () => {
             </button>
           </div>
         </div>
-
       </div>
 
-      {/* Mobile side menu component */}
-      <MobileSideMenu
-        isMobileMenuOpen={isMobileMenuOpen}
-        closeMobileMenu={closeMobileMenu}
-      />
+      <MobileSideMenu isMobileMenuOpen={isMobileMenuOpen} closeMobileMenu={closeMobileMenu} />
     </nav>
   );
 };

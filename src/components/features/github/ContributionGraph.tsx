@@ -3,6 +3,7 @@
 import { useState, useCallback, useEffect } from 'react';
 import { FaGithub } from 'react-icons/fa6';
 import type { ContributionData } from '@/lib/githubContributions';
+import { GITHUB_USER } from '@/config/site';
 
 type Data = { totalContributions: number; weeks: { contributionDays: { date: string; contributionCount: number }[] }[] };
 
@@ -291,7 +292,7 @@ export default function ContributionGraph({ initialData }: Props) {
         </div>
 
         <a
-          href="https://github.com/ARISA1115"
+          href={`https://github.com/${GITHUB_USER}`}
           target="_blank"
           rel="noopener noreferrer"
           className="inline-block mt-3 text-sm text-blue-400 hover:text-blue-300 transition-colors"
